@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#006e80" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Indicadores | Prosperar Imóveis</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="core.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="assets/logo-prosperar.png" alt="Prosperar Imóveis" /><span
+            >INTELIGÊNCIA COMERCIAL</span
+          >
+        </div>
+        <nav aria-label="Navegação principal">
+          <p>ESPAÇO DE TRABALHO</p>
+          <button class="nav active" data-view="dashboard">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+            Painel de indicadores</button
+          ><button class="nav" data-view="records">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              aria-hidden="true"
+            >
+              <path d="M5 5h14M5 12h14M5 19h14" />
+              <circle cx="2" cy="5" r=".7" />
+              <circle cx="2" cy="12" r=".7" />
+              <circle cx="2" cy="19" r=".7" />
+            </svg>
+            Registros
+          </button>
+        </nav>
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Dados neste navegador</strong
+            ><small>Faça backups para não perder seus registros.</small>
+          </div>
+        </div>
+      </aside>
+      <div class="workspace">
+        <header class="topbar">
+          <div class="mobile-brand">PROSPERAR <span> / INDICADORES</span></div>
+          <div class="breadcrumb">
+            PROSPERAR IMÓVEIS <span>/</span>
+            <strong id="breadcrumb">Painel</strong>
+          </div>
+          <div class="top-actions">
+            <button class="ghost" id="import-btn">Importar backup</button
+            ><button class="ghost" id="export-btn">Exportar backup</button
+            ><input
+              type="file"
+              id="import-file"
+              accept="application/json,.json"
+              hidden
+            />
+          </div>
+        </header>
+        <div class="mobile-nav">
+          <button class="mobile-nav-button active" data-view="dashboard">
+            Painel</button
+          ><button class="mobile-nav-button" data-view="records">
+            Registros
+          </button>
+        </div>
+        <main>
+          <div class="heading">
+            <div>
+              <div class="eyebrow"><span></span> VISÃO GERAL DO NEGÓCIO</div>
+              <h1 id="page-title">Indicadores comerciais</h1>
+              <p id="page-subtitle">
+                Acompanhe captações, carteira, leads e vendas.
+              </p>
+            </div>
+            <button class="primary" id="new-record">
+              <span>＋</span> Novo registro
+            </button>
+          </div>
+          <div class="toolbar">
+            <div
+              class="tabs"
+              role="tablist"
+              aria-label="Visualização dos indicadores"
+            >
+              <button
+                role="tab"
+                aria-selected="true"
+                class="tab active"
+                data-view="dashboard"
+              >
+                Visão geral</button
+              ><button
+                role="tab"
+                aria-selected="false"
+                class="tab"
+                data-view="records"
+              >
+                Todos os registros
+              </button>
+            </div>
+            <div class="month-control" aria-label="Selecionar mês">
+              <button id="previous-month" aria-label="Mês anterior">‹</button
+              ><span id="month-label"></span
+              ><button id="next-month" aria-label="Próximo mês">›</button
+              ><button id="current-month" class="today">Hoje</button>
+            </div>
+          </div>
+          <section id="dashboard" aria-label="Indicadores">
+            <div class="section-heading">
+              <div>
+                <span class="kicker">DESEMPENHO</span>
+                <h2>Os números do período</h2>
+              </div>
+              <p>Dados atualizados conforme seus registros</p>
+            </div>
+            <div id="metrics" class="metrics"></div>
+            <div class="section-heading breakdown-heading">
+              <div>
+                <span class="kicker">ANÁLISE DETALHADA</span>
+                <h2>Detalhamento por categoria</h2>
+              </div>
+            </div>
+            <div id="breakdowns" class="breakdowns"></div>
+            <div id="empty-note" class="empty-note" hidden>
+              Cadastre imóveis e atividades para preencher os indicadores.
+            </div>
+          </section>
+          <section id="records" hidden aria-label="Registros">
+            <div class="section-heading">
+              <div>
+                <span class="kicker">ACOMPANHAMENTO</span>
+                <h2>Registros comerciais</h2>
+                <p>
+                  Imóveis de todos os períodos e atividades do mês selecionado.
+                </p>
+              </div>
+            </div>
+            <div class="record-filters">
+              <label
+                ><span class="sr-only">Buscar registros</span
+                ><input
+                  type="search"
+                  id="record-search"
+                  placeholder="Buscar identificação..." /></label
+              ><label
+                ><span class="sr-only">Filtrar tipo</span
+                ><select id="record-filter">
+                  <option value="all">Todos os tipos</option>
+                  <option value="property">Imóveis captados</option>
+                  <option value="lead">Leads</option>
+                  <option value="visit">Visitas</option>
+                  <option value="proposal">Propostas</option>
+                  <option value="sale">Vendas</option>
+                  <option value="negotiation">Negociações</option>
+                </select></label
+              >
+            </div>
+            <div id="record-list" class="record-list"></div>
+          </section>
+          <footer>
+            <span>PROSPERAR IMÓVEIS</span
+            ><span>Os dados ficam salvos neste navegador.</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+    <dialog id="record-dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="kicker">ACOMPANHAMENTO COMERCIAL</span>
+          <h2 id="form-title">Novo registro</h2>
+          <p>Preencha os dados para atualizar seus indicadores.</p>
+        </div>
+        <button
+          class="icon-button"
+          id="close-dialog"
+          type="button"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+      </div>
+      <form id="record-form">
+        <div class="form-body">
+          <label
+            >Tipo de registro<select name="kind" id="kind" required>
+              <option value="property">Imóvel captado</option>
+              <option value="lead">Lead</option>
+              <option value="visit">Visita</option>
+              <option value="proposal">Proposta</option>
+              <option value="sale">Venda</option>
+              <option value="negotiation">Negociação</option>
+            </select></label
+          ><label
+            >Identificação<input
+              name="reference"
+              required
+              maxlength="160"
+              placeholder="Ex.: Casa Jardim Panorama" /></label
+          ><label>Data<input name="date" type="date" required /></label>
+          <div id="property-fields">
+            <div class="form-grid">
+              <label
+                >Tipo de imóvel<select name="property_type">
+                  <option value="">Selecione</option>
+                  <option value="rural">Rural</option>
+                  <option value="apartment">Apartamento</option>
+                  <option value="house">Casa</option>
+                  <option value="commercial">Comercial</option>
+                  <option value="land">Terreno</option>
+                </select></label
+              ><label
+                >Origem da captação<select name="capture_source">
+                  <option value="">Selecione</option>
+                  <option value="captadora">Captadora</option>
+                  <option value="system">Sistema de captação</option>
+                  <option value="broker">Corretora</option>
+                  <option value="agency">Imobiliária</option>
+                </select></label
+              >
+            </div>
+            <div class="form-grid">
+              <label
+                >Exclusividade<select name="exclusive">
+                  <option value="">Selecione</option>
+                  <option value="true">Com exclusividade</option>
+                  <option value="false">Sem exclusividade</option>
+                </select></label
+              ><label
+                >Valor do imóvel (R$)<input
+                  name="value"
+                  inputmode="decimal"
+                  placeholder="Ex.: 350.000,00"
+              /></label>
+            </div>
+            <label
+              >Situação na carteira<select name="status">
+                <option value="available">À venda</option>
+                <option value="sold">Vendido</option>
+                <option value="inactive">Fora da carteira</option>
+              </select></label
+            >
+          </div>
+          <div id="lead-fields" hidden>
+            <label
+              >Canal de origem<select name="lead_channel">
+                <option value="">Selecione</option>
+                <option value="social">Redes sociais</option>
+                <option value="l4">L4</option>
+                <option value="other">Outros</option>
+              </select></label
+            >
+          </div>
+          <div id="activity-fields" hidden>
+            <label
+              >Imóvel relacionado <span class="optional">(opcional)</span
+              ><select name="property_id" id="property-select">
+                <option value="">Nenhum</option>
+              </select></label
+            >
+          </div>
+          <div id="negotiation-fields" hidden>
+            <label
+              >Data de encerramento <span class="optional">(opcional)</span
+              ><input name="closed_on" type="date" /><small
+                >Deixe em branco enquanto estiver em andamento.</small
+              ></label
+            >
+          </div>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </div>
+        <div class="form-footer">
+          <button id="delete-record" type="button" class="delete" hidden>
+            Excluir registro</button
+          ><span class="spacer"></span
+          ><button id="cancel-dialog" type="button" class="secondary">
+            Cancelar</button
+          ><button type="submit" class="primary">Salvar registro</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>
