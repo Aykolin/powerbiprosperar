@@ -1,5 +1,7 @@
 # Indicadores comerciais · Prosperar Imóveis
 
+Projeto acadêmico desenvolvido para a faculdade, voltado ao acompanhamento de indicadores comerciais de uma imobiliária.
+
 Aplicação independente e estática, sem login, Supabase ou conexão com o portal. Os dados ficam no navegador usado para cadastrar as informações. Começa vazia, sem importar os dados do portal.
 
 ## Como abrir

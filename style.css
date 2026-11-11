@@ -738,6 +738,24 @@ dialog::backdrop {
   .form-grid {
     grid-template-columns: 1fr;
   }
+  .record-filters label {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .record-filters input {
+    width: 100%;
+  }
+  .month-control > button {
+    min-height: 44px;
+  }
+  .record {
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+  .record .amount {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }
 @media (max-width: 380px) {
   .top-actions {
@@ -751,5 +769,21 @@ dialog::backdrop {
   }
   .break-row {
     grid-template-columns: 100px 1fr 24px;
+  }
+  .form-footer {
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+  .form-footer .spacer {
+    display: none;
+  }
+  .form-footer .delete {
+    flex-basis: 100%;
+    text-align: left;
+    padding: 8px 0;
+  }
+  .form-footer .secondary,
+  .form-footer .primary {
+    flex: 1 1 100px;
   }
 }
